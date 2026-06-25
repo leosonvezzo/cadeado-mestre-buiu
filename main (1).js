@@ -8,10 +8,13 @@ const uppercaseEl = document.getElementById('uppercase');
 const numbersEl = document.getElementById('numbers');
 const symbolsEl = document.getElementById('symbols');
 
-// Elementos dos novos filtros
 const noRepeatEl = document.getElementById('no-repeat');
 const startLetterEl = document.getElementById('start-letter');
 const spacesEl = document.getElementById('spaces');
+
+// Elementos novos da Barra de Força
+const strengthText = document.getElementById('strength-text');
+const strengthBarFill = document.getElementById('strength-bar-fill');
 
 // Dicionários de caracteres
 const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -19,16 +22,59 @@ const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numberChars = "0123456789";
 const symbolChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
+// Função para calcular e estilizar a força da senha baseada em regras reais
+function updateStrengthMeter(password, length) {
+    let score = 0;
+
+    // Critério 1: Comprimento da senha
+    if (length >= 8) score++;
+    if (length >= 14) score++;
+
+    // Critério 2: Variabilidade de tipos de caracteres incluídos
+    if (uppercaseEl.checked) score++;
+    if (numbersEl.checked) score++;
+    if (symbolsEl.checked) score++;
+    if (spacesEl.checked) score++;
+
+    // Remove classes anteriores
+    strengthBarFill.className = "strength-bar-fill";
+    strengthText.className = "strength-state";
+
+    // Classificação e aplicação das novas cores customizadas
+    if (password === "" || password === "Clique em Gerar...") {
+        strengthText.textContent = "Inexistente";
+        strengthBarFill.style.width = "0%";
+    } else if (score <= 2) {
+        strengthText.textContent = "Fraca ⚠️";
+        strengthBarFill.style.width = "25%";
+        strengthBarFill.classList.add("state-fraca");
+        strengthText.classList.add("state-fraca");
+    } else if (score === 3 || score === 4) {
+        strengthText.textContent = "Razoável 🛡️";
+        strengthBarFill.style.width = "50%";
+        strengthBarFill.classList.add("state-media");
+        strengthText.classList.add("state-media");
+    } else if (score === 5) {
+        strengthText.textContent = "Muito Forte 💪";
+        strengthBarFill.style.width = "85%";
+        strengthBarFill.classList.add("state-forte");
+        strengthText.classList.add("state-forte");
+    } else {
+        strengthText.textContent = "Imbatível 💎";
+        strengthBarFill.style.width = "100%";
+        strengthBarFill.classList.add("state-imbativel");
+        strengthText.classList.add("state-imbativel");
+    }
+}
+
 // Função para gerar a senha aleatória
 function generatePassword() {
     let length = parseInt(lengthEl.value);
     
-    // Validação de segurança para o tamanho
     if (length < 4) length = 4;
     if (length > 32) length = 32;
     lengthEl.value = length;
 
-    // Configura o banco de caracteres com base nas seleções
     let lettersOnly = lowercaseChars;
     if (uppercaseEl.checked) lettersOnly += uppercaseChars;
 
@@ -40,7 +86,6 @@ function generatePassword() {
     let password = "";
 
     for (let i = 0; i < length; i++) {
-        // Regra: Começar obrigatoriamente com letra
         if (i === 0 && startLetterEl.checked) {
             const randomIndex = Math.floor(Math.random() * lettersOnly.length);
             password += lettersOnly[randomIndex];
@@ -50,7 +95,6 @@ function generatePassword() {
         let nextChar = "";
         let attempts = 0;
 
-        // Regra: Evitar repetição consecutiva (ex: "aa")
         do {
             const randomIndex = Math.floor(Math.random() * allowedChars.length);
             nextChar = allowedChars[randomIndex];
@@ -61,10 +105,12 @@ function generatePassword() {
     }
 
     displayBtn.textContent = password;
-    copyBtn.textContent = "Copiar"; // Reseta o texto do botão de cópia
+    copyBtn.textContent = "Copiar";
+    
+    // Dispara a atualização visual da barra de força
+    updateStrengthMeter(password, length);
 }
 
-// Função para copiar a senha para a área de transferência
 function copyToClipboard() {
     const password = displayBtn.textContent;
     if (password === "Clique em Gerar..." || password === "") return;
@@ -77,23 +123,5 @@ function copyToClipboard() {
     });
 }
 
-// Eventos
-generateBtn.addEventListener('click', generatePassword);
-copyBtn.addEventListener('click', copyToClipboard);
-
-// Função para copiar a senha para a área de transferência
-function copyToClipboard() {
-    const password = displayBtn.textContent;
-    if (password === "Clique em Gerar..." || password === "") return;
-
-    navigator.clipboard.writeText(password).then(() => {
-        copyBtn.textContent = "Copiado!";
-        setTimeout(() => {
-            copyBtn.textContent = "Copiar";
-        }, 2000);
-    });
-}
-
-// Eventos que disparam as funções ao clicar nos botões
 generateBtn.addEventListener('click', generatePassword);
 copyBtn.addEventListener('click', copyToClipboard);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Senhas Aleatórias Completas - 2026</title>
+    <title>Gerador de Senhas Criptográficas - 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -63,6 +63,11 @@
         <div class="form-group">
             <label for="spaces">Incluir Espaços em Branco</label>
             <input type="checkbox" id="spaces">
+        </div>
+
+        <div class="form-group row-hash">
+            <label for="encrypt-hash">Simular Hash Criptográfico (SHA-256)</label>
+            <input type="checkbox" id="encrypt-hash">
         </div>
 
         <button class="btn-generate" id="generate-btn">Gerar Senha Nova</button>

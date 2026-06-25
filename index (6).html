@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Senhas com Medidor de Força - 2026</title>
+    <title>Gerador de Senhas Aleatórias Completas - 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,13 +27,17 @@
         </div>
 
         <div class="form-group">
-            <label for="length">Quantidade de caracteres:</label>
-            <input type="number" id="length" min="4" max="32" value="12">
+            <label>Quantidade de caracteres:</label>
+            <div class="counter-container">
+                <button type="button" class="btn-counter" id="btn-minus">–</button>
+                <span id="length-display">12</span>
+                <button type="button" class="btn-counter" id="btn-plus">+</button>
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="uppercase">Incluir Letras Maiúsculas</label>
-            <input type="checkbox" id="uppercase" checked>
+            <label for="mix-cases">Misturar Maiúsculas e Minúsculas</label>
+            <input type="checkbox" id="mix-cases" checked>
         </div>
 
         <div class="form-group">

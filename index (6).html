@@ -3,74 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Senhas Criptográficas - 2026</title>
+    <title>Classificador de Faixa Etária - 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Gerador de Senhas</h1>
+        <h1>Classificador de Idade</h1>
         
         <div class="output-container">
-            <span id="password-display">Clique em Gerar...</span>
-            <button class="btn-copy" id="copy-btn">Copiar</button>
+            <span class="age-label">Idade Selecionada:</span>
+            <div class="counter-container">
+                <button type="button" class="btn-counter" id="btn-minus">–</button>
+                <span id="age-display">12</span>
+                <button type="button" class="btn-counter" id="btn-plus">+</button>
+            </div>
         </div>
 
         <div class="strength-container">
             <div class="strength-header">
-                <span class="strength-label">ANÁLISE DE SEGURANÇA:</span>
-                <span id="strength-text" class="strength-state">Inexistente</span>
+                <span class="strength-label">CLASSIFICAÇÃO:</span>
+                <span id="classification-text" class="strength-state">Adolescente</span>
             </div>
             <div class="strength-bar-bg">
                 <div id="strength-bar-fill" class="strength-bar-fill"></div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label>Quantidade de caracteres:</label>
-            <div class="counter-container">
-                <button type="button" class="btn-counter" id="btn-minus">–</button>
-                <span id="length-display">12</span>
-                <button type="button" class="btn-counter" id="btn-plus">+</button>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="mix-cases">Misturar Maiúsculas e Minúsculas</label>
-            <input type="checkbox" id="mix-cases" checked>
-        </div>
-
-        <div class="form-group">
-            <label for="numbers">Incluir Números</label>
-            <input type="checkbox" id="numbers" checked>
-        </div>
-
-        <div class="form-group">
-            <label for="symbols">Incluir Símbolos Especiais</label>
-            <input type="checkbox" id="symbols" checked>
-        </div>
-
-        <div class="form-group">
-            <label for="no-repeat">Evitar Caracteres Repetidos</label>
-            <input type="checkbox" id="no-repeat">
-        </div>
-
-        <div class="form-group">
-            <label for="start-letter">Começar com Letra</label>
-            <input type="checkbox" id="start-letter">
-        </div>
-
-        <div class="form-group">
-            <label for="spaces">Incluir Espaços em Branco</label>
-            <input type="checkbox" id="spaces">
-        </div>
-
-        <div class="form-group row-hash">
-            <label for="encrypt-hash">Simular Hash Criptográfico (SHA-256)</label>
-            <input type="checkbox" id="encrypt-hash">
-        </div>
-
-        <button class="btn-generate" id="generate-btn">Gerar Senha Nova</button>
+        <p class="info-text">Altere a idade nos botões acima para ver a categoria mudar dinamicamente.</p>
     </div>
 
     <script src="script.js"></script>

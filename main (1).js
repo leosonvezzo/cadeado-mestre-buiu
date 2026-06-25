@@ -8,6 +8,11 @@ const uppercaseEl = document.getElementById('uppercase');
 const numbersEl = document.getElementById('numbers');
 const symbolsEl = document.getElementById('symbols');
 
+// Elementos dos novos filtros
+const noRepeatEl = document.getElementById('no-repeat');
+const startLetterEl = document.getElementById('start-letter');
+const spacesEl = document.getElementById('spaces');
+
 // Dicionários de caracteres
 const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
 const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -23,21 +28,58 @@ function generatePassword() {
     if (length > 32) length = 32;
     lengthEl.value = length;
 
-    let allowedChars = lowercaseChars; // Minúsculas sempre inclusas
-    
-    if (uppercaseEl.checked) allowedChars += uppercaseChars;
+    // Configura o banco de caracteres com base nas seleções
+    let lettersOnly = lowercaseChars;
+    if (uppercaseEl.checked) lettersOnly += uppercaseChars;
+
+    let allowedChars = lettersOnly;
     if (numbersEl.checked) allowedChars += numberChars;
     if (symbolsEl.checked) allowedChars += symbolChars;
+    if (spacesEl.checked) allowedChars += " ";
 
     let password = "";
+
     for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * allowedChars.length);
-        password += allowedChars[randomIndex];
+        // Regra: Começar obrigatoriamente com letra
+        if (i === 0 && startLetterEl.checked) {
+            const randomIndex = Math.floor(Math.random() * lettersOnly.length);
+            password += lettersOnly[randomIndex];
+            continue;
+        }
+
+        let nextChar = "";
+        let attempts = 0;
+
+        // Regra: Evitar repetição consecutiva (ex: "aa")
+        do {
+            const randomIndex = Math.floor(Math.random() * allowedChars.length);
+            nextChar = allowedChars[randomIndex];
+            attempts++;
+        } while (noRepeatEl.checked && nextChar === password.slice(-1) && attempts < 20);
+
+        password += nextChar;
     }
 
     displayBtn.textContent = password;
     copyBtn.textContent = "Copiar"; // Reseta o texto do botão de cópia
 }
+
+// Função para copiar a senha para a área de transferência
+function copyToClipboard() {
+    const password = displayBtn.textContent;
+    if (password === "Clique em Gerar..." || password === "") return;
+
+    navigator.clipboard.writeText(password).then(() => {
+        copyBtn.textContent = "Copiado!";
+        setTimeout(() => {
+            copyBtn.textContent = "Copiar";
+        }, 2000);
+    });
+}
+
+// Eventos
+generateBtn.addEventListener('click', generatePassword);
+copyBtn.addEventListener('click', copyToClipboard);
 
 // Função para copiar a senha para a área de transferência
 function copyToClipboard() {

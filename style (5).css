@@ -47,11 +47,12 @@ h1 {
 
 #password-display {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 18px;
+    font-size: 16px; /* Reduzido levemente para o Hash de 64 caracteres não quebrar o layout */
     font-weight: bold;
     color: #38bdf8;
     word-break: break-all;
     user-select: all;
+    max-width: 75%;
 }
 
 /* Barra de Força */
@@ -162,6 +163,13 @@ h1 {
     align-items: center;
 }
 
+/* Destaque visual sutil para a linha do desafio de criptografia */
+.row-hash {
+    border-top: 1px dashed #334155;
+    padding-top: 12px;
+    margin-top: 18px;
+}
+
 label {
     font-size: 14px;
     color: #cbd5e1;
@@ -197,10 +205,6 @@ input[type="checkbox"] {
     background-position: right center;
     box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
     transform: translateY(-2px);
-}
-
-.btn-generate:active:not(:disabled) {
-    transform: translateY(1px);
 }
 
 .btn-generate:disabled {

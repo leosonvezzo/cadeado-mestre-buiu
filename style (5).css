@@ -27,9 +27,10 @@ body {
 
 h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
     color: #38bdf8;
+    letter-spacing: 1px; /* Espaçamento entre as letras do título */
 }
 
 /* Área de Exibição da Senha */
@@ -38,7 +39,7 @@ h1 {
     background-color: #0f172a;
     border-radius: 8px;
     padding: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #334155;
@@ -53,7 +54,59 @@ h1 {
     user-select: all;
 }
 
-/* --- BOTÃO DE COPIAR --- */
+/* --- ESTILIZAÇÃO COMPLETA DA BARRA DE FORÇA --- */
+.strength-container {
+    background-color: #0f172a; /* Cor de fundo do bloco da barra */
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 25px; /* Espaçamento inferior aumentado para respirar o layout */
+    border: 1px solid #1e293b;
+}
+
+.strength-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.strength-label {
+    color: #64748b;
+    letter-spacing: 2px; /* Espaçamento personalizado entre as letras do rótulo */
+}
+
+.strength-state {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+/* Fundo da barra de progresso */
+.strength-bar-bg {
+    background-color: #334155; /* Cinza escuro para a barra vazia */
+    height: 8px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Preenchimento da barra com transição suave */
+.strength-bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #ef4444; /* Cor inicial padrão (Fraca) */
+    border-radius: 4px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+/* Classes dinâmicas de força injetadas via JS */
+.state-fraca { color: #f43f5e; background-color: #f43f5e !important; }      /* Rosa/Vermelho Neon */
+.state-media { color: #a855f7; background-color: #a855f7 !important; }      /* Roxo Neon */
+.state-forte { color: #3b82f6; background-color: #3b82f6 !important; }      /* Azul Elétrico */
+.state-imbativel { color: #10b981; background-color: #10b981 !important; }  /* Verde Esmeralda */
+
+/* Botão de Copiar */
 .btn-copy {
     background: transparent;
     color: #94a3b8;
@@ -73,14 +126,14 @@ h1 {
 
 /* Configurações (Filtros) */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 label {
-    font-size: 15px;
+    font-size: 14px;
     color: #cbd5e1;
 }
 
@@ -101,7 +154,7 @@ input[type="checkbox"] {
     accent-color: #38bdf8;
 }
 
-/* --- BOTÃO PRINCIPAL DE GERAR --- */
+/* Botão Principal de Gerar */
 .btn-generate {
     width: 100%;
     background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
@@ -110,12 +163,12 @@ input[type="checkbox"] {
     padding: 14px;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
     box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
     transition: all 0.3s ease;
 }

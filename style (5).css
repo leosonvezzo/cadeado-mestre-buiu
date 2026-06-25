@@ -33,42 +33,72 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* Área de Exibição da Senha */
+/* Painel de Exibição da Idade */
 .output-container {
     display: flex;
     background-color: #0f172a;
     border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #334155;
 }
 
-#password-display {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px; /* Reduzido levemente para o Hash de 64 caracteres não quebrar o layout */
-    font-weight: bold;
-    color: #38bdf8;
-    word-break: break-all;
-    user-select: all;
-    max-width: 75%;
+.age-label {
+    font-size: 15px;
+    color: #94a3b8;
+    font-weight: 500;
 }
 
-/* Barra de Força */
+/* Componente do Seletor (+ e -) */
+.counter-container {
+    display: flex;
+    align-items: center;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.btn-counter {
+    background: transparent;
+    border: none;
+    color: #38bdf8;
+    font-size: 18px;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-counter:hover {
+    background-color: rgba(56, 189, 248, 0.1);
+}
+
+#age-display {
+    min-width: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Bloco da Barra de Classificação */
 .strength-container {
     background-color: #0f172a;
-    padding: 12px;
+    padding: 16px;
     border-radius: 8px;
-    margin-bottom: 25px;
-    border: 1px solid #1e293b;
+    margin-bottom: 20px;
+    border: 1px solid #334155;
 }
 
 .strength-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 11px;
+    margin-bottom: 10px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -85,132 +115,27 @@ h1 {
 
 .strength-bar-bg {
     background-color: #334155;
-    height: 8px;
+    height: 10px;
     width: 100%;
-    border-radius: 4px;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 .strength-bar-fill {
     height: 100%;
     width: 0%;
-    background-color: #ef4444;
-    border-radius: 4px;
+    border-radius: 5px;
     transition: width 0.4s ease, background-color 0.4s ease;
 }
 
-.state-fraca { color: #f43f5e; background-color: #f43f5e !important; }
-.state-media { color: #a855f7; background-color: #a855f7 !important; }
-.state-forte { color: #3b82f6; background-color: #3b82f6 !important; }
-.state-imbativel { color: #10b981; background-color: #10b981 !important; }
+/* Cores customizadas para cada faixa etária */
+.color-crianca { color: #3b82f6; background-color: #3b82f6; }       /* Azul */
+.color-adolescente { color: #a855f7; background-color: #a855f7; }   /* Roxo */
+.color-adulta { color: #10b981; background-color: #10b981; }        /* Verde */
 
-/* Botão de Copiar */
-.btn-copy {
-    background: transparent;
-    color: #94a3b8;
-    border: 1px solid #334155;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s ease;
-}
-
-.btn-copy:hover {
-    color: #38bdf8;
-    border-color: #38bdf8;
-    background-color: rgba(56, 189, 248, 0.1);
-}
-
-/* Componente do Seletor de Tamanho (+ e -) */
-.counter-container {
-    display: flex;
-    align-items: center;
-    background-color: #0f172a;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.btn-counter {
-    background: transparent;
-    border: none;
-    color: #38bdf8;
-    font-size: 18px;
-    font-weight: bold;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-counter:hover {
-    background-color: rgba(56, 189, 248, 0.1);
-}
-
-#length-display {
-    min-width: 30px;
+.info-text {
     text-align: center;
-    font-weight: bold;
-    color: #fff;
-}
-
-/* Configurações de Linha (Filtros) */
-.form-group {
-    margin-bottom: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Destaque visual sutil para a linha do desafio de criptografia */
-.row-hash {
-    border-top: 1px dashed #334155;
-    padding-top: 12px;
-    margin-top: 18px;
-}
-
-label {
-    font-size: 14px;
-    color: #cbd5e1;
-}
-
-input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: #38bdf8;
-}
-
-/* Botão Principal de Gerar */
-.btn-generate {
-    width: 100%;
-    background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-    background-size: 200% auto;
-    color: #ffffff;
-    padding: 14px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
-    transition: all 0.3s ease;
-}
-
-.btn-generate:hover:not(:disabled) {
-    background-position: right center;
-    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
-    transform: translateY(-2px);
-}
-
-.btn-generate:disabled {
-    background: #475569;
-    color: #94a3b8;
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.4;
 }
